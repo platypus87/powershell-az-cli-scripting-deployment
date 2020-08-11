@@ -15,9 +15,10 @@ az configure --default location=eastus
 az group create -n $rgName
 az configure --default group=$rgName
 
+
 # TODO: provision VM
 az vm create -n $vmName --size "$vmSize" --image "$vmImage" --admin-username "student" --assign-identity
-
+az configure --default vm="$vmName"
 # TODO: capture the VM systemAssignedIdentity
 $systemAssignedIdentity="$(az vm show --query "identity.principalId" -o tsv)"
 
@@ -41,4 +42,4 @@ az vm run-command invoke --command-id RunShellScript --scripts @deliver-deploy.s
 
 
 # TODO: print VM public IP address to STDOUT or save it as a file
-ifconfig
+#ifconfig
