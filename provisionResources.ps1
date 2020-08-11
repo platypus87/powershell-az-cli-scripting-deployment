@@ -25,10 +25,10 @@ $systemAssignedIdentity="$(az vm show --query "identity.principalId" -o tsv)"
 az vm open-port --port 443
 
 # provision KV
-az keyvault create -n $kvName --enable-soft-delete false --enabled-for-deployment true
+az keyvault create -n "$kvName" --enable-soft-delete false --enabled-for-deployment true
 
 # TODO: create KV secret (database connection string)
-az keyvault secret set --vault-name $kvName -n $kvSecretName --value $kvSecretValue
+az keyvault secret set --vault-name "$kvName" -n "$kvSecretName" --value "$kvSecretValue"
 
 # TODO: set KV access-policy (using the vm ``systemAssignedIdentity``)
 az keyvault set-policy -n "$kvName" --object-id "$systemAssignedIdentity" --secret-permissions get list
