@@ -47,4 +47,4 @@ az vm run-command invoke --command-id RunShellScript --scripts @deliver-deploy.s
 echo "deploy complete"
 
 # TODO: print VM public IP address to STDOUT or save it as a file
-write-output (az vm list-ip-address -n $vmName -g $rgName | convertfrom-json)[0].virtualmachine.network.publicipaddresses.ipaddress
+write-output (az vm list-ip-addresses -n $vmName -g $rgName | convertfrom-json)[0].virtualmachine.network.publicipaddresses.ipaddress
